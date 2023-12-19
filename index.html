@@ -24,14 +24,52 @@
     <div class="buttons text-center mt-4">
       <button type="button" class="btn btn-primary mx-2" id="runClean">Cleaner</button>
       <button type="button" class="btn btn-primary mx-2" id="runDebloat">Debloat</button>
-      <button type="button" class="btn btn-primary mx-2">Optimize</button>
+      <div id="ramUsage" class="mt-4">
+        <h4 class="text-center mb-3">Ram Usage</h4>
+        <div class="progress">
+          <div id="progressBar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <p class="mt-2">Total RAM: <span id="totalRam"></span></p>
+        <p>Free RAM: <span id="freeRam"></span></p>
+        <p>Used RAM: <span id="usedRam"></span></p>
+      </div>
     </div>
-    <p style="color:#4c4c4c">&copy; 2023 Parcoil Network </p>
+    <p class="mt-5" style="color:#4c4c4c">&copy; 2023 Parcoil Network </p>
   </div>
- 
   <script src="script.js"></script>
 </body>
 </html>
+<style>
+/* Your existing CSS */
+/* Update or add styles as needed */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 35px);
+  padding-top: 20px;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+/* Additional refinements */
+.btn-primary {
+  font-weight: 500;
+  font-size: 16px;
+  padding: 10px 20px;
+}
+.btn-primary:hover {
+  opacity: 0.8;
+}
+.progress {
+  width: 50%;
+  margin: auto;
+}
+</style>
+
 <style>
 * {
   box-sizing: border-box;

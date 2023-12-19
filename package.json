@@ -5,14 +5,16 @@
   "author": "The Parcoil network",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder"
+    "build": "electron-builder"
   },
   "devDependencies": {
     "electron": "^27.0.0",
-    "electron-builder": "^22.14.13"
+    "electron-builder": "^22.14.13",
+    "electron-updater": "^6.1.7"
   },
   "dependencies": {
-    "electron-notification": "^1.0.0"
+    "electron-notification": "^1.0.0",
+    "electron-updater": "^6.1.7"
   },
   "build": {
     "appId": "com.parcoil.sparkle",
