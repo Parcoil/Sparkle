@@ -6,25 +6,141 @@
   <title>Document</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
-  <link href="https://cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
-<script src="https://cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
-  <nav style="-webkit-app-region: drag">
-
-    <p id="title">✨Sparkle</p>
+  <nav class="nav-buttons" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" style="-webkit-app-region: drag">
+    <button href="#offcanvasExample"><i class="fa-light fa-bars"></i></button>
+    <p id="title">✨Sparkle v1.0.0</p>
     <div class="nav-buttons">
       <button id="minimize"><i class="fa-light fa-window-minimize"></i></button>
       <button id="maximize"><i class="fa-light fa-square"></i></button>
       <button id="close"><i class="fa-light fa-xmark"></i></button>
     </div>
   </nav>
-  <h1 class="welcome">Welcome User</h1>
-  <div class="container">
-    <button id="runClean">Run Cleaner</button>
-    <button id="runDebloat">Debloat</button>
-    <button class="mui-btn">Button</button>
+  <h1 class="text-center">Welcome To Sparkle ✨</h1>
+  <h3 class="text-center">Changelog</h3>
+  <p class="text-center">
+    v1.0.0
+    First Release!
+  </p>
+  
+  
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header text-bg-dark">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body text-bg-dark">
+      <div>
+        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+      </div>
+      <div class="dropdown mt-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          Dropdown button
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
+  <div class="container">
+    <button type="button" class="btn btn-primary" id="runClean">Run Cleaner</button>
+    <button type="button" class="btn btn-primary" id="runDebloat">Debloat</button>
+    <button type="button" class="btn btn-primary">Button</button>
+  </div> 
   <script src="script.js"></script>
 </body>
 </html>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+* {
+  box-sizing: border-box;
+  font-family: "Inter";
+}
+body {
+  background: #121212;
+  color: #ededed;
+  padding: 0;
+  margin: 0;
+}
+nav {
+  position: sticky;
+  border: 1px solid #2c2c2c;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  background: #1c1c1c;
+}
+#title {
+  user-select: none;
+  font-size: 15px;
+  margin-left: 10px;
+  -webkit-app-region: drag;
+  margin-bottom:0px;
+}
+:not(nav) {
+  -webkit-app-region: no-drag;
+}
+.nav-buttons {
+  margin-left: auto;
+  height: 100%;
+  display: flex;
+}
+.nav-buttons > button {
+  transition: background .2s ease;
+  background: #1c1c1c;
+  border: none;
+  height: 100%;
+  margin: 0;
+  aspect-ratio: 1;
+  color: #ededed;
+  font-size: 17px;
+}
+.nav-buttons > button:hover {
+  transition: .2s ease;
+  background: #2c2c2c;
+  cursor: pointer;
+}
+.nav-buttons > button:active {
+  background: #4c4c4c;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.buttons {
+  margin-bottom: 20px;
+}
+
+
+
+#console {
+  width: 80%;
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.welcome {
+  text-align: left;
+  margin-left: 10px;
+} 
+body::-webkit-scrollbar {
+  display: none;
+}
+</style>

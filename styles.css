@@ -77,7 +77,7 @@ body {
   overflow-y: auto;
 }
 .welcome {
-  text-align: left;
+  text-align: right;
   margin-left: 10px;
 } 
 body::-webkit-scrollbar {
