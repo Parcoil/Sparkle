@@ -1,0 +1,13 @@
+{
+  "name": "custom-menubar",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^27.0.0"
+  },
+  "dependencies": {
+    "electron-notification": "^1.0.0"
+  }
+}
