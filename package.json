@@ -7,10 +7,10 @@
     "start": "electron .",
     "build": "electron-builder"
   },
+  "repository": "https://github.com/parcoil/sparkle",
   "devDependencies": {
     "electron": "^27.0.0",
-    "electron-builder": "^22.14.13",
-    "electron-updater": "^6.1.7"
+    "electron-builder": "^22.14.13"
   },
   "dependencies": {
     "electron-notification": "^1.0.0",
