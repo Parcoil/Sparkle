@@ -5,7 +5,6 @@ const path = require('path');
 const https = require('https');
 const os = require('os');
 
-
 let win;
 
 function createWindow() {
@@ -25,6 +24,7 @@ function createWindow() {
   win.on('closed', () => {
     win = null;
   });
+
   let maximizeToggle = false;
 
   ipcMain.on('manualMinimize', () => {
@@ -32,7 +32,7 @@ function createWindow() {
       win.minimize();
     }
   });
-  
+
   ipcMain.on('manualMaximize', () => {
     if (win) {
       if (maximizeToggle) {
@@ -43,10 +43,16 @@ function createWindow() {
       maximizeToggle = !maximizeToggle;
     }
   });
-  
+
   ipcMain.on('manualClose', () => {
     app.quit();
   });
+
+  function createDirectoryIfNotExists(dirPath) {
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath, { recursive: true });
+    }
+  }
 
   function downloadNewerFile(url, filePath, callback) {
     https.get(url, function (response) {
@@ -71,25 +77,32 @@ function createWindow() {
       }
     });
   }
-  
+
   ipcMain.on('run-clean', () => {
-    const cleanBatPath = path.join(os.homedir(), 'AppData', 'Local', 'Programs', 'sparkle', 'clean.bat');
+    const installDir = 'C:\\Program Files (x86)\\The Parcoil Network\\Sparkle';
+    const cleanBatPath = path.join(installDir, 'clean.bat');
     const cleanBatUrl = 'https://raw.githubusercontent.com/Parcoil/files/main/clean.bat';
-    
+
+    createDirectoryIfNotExists(installDir);
+
     downloadNewerFile(cleanBatUrl, cleanBatPath, () => {
       runBatFile(cleanBatPath);
     });
   });
-  
+
   ipcMain.on('run-debloat', () => {
-    const debloatBatPath = path.join(os.homedir(), 'AppData', 'Local', 'Programs', 'sparkle', 'debloat.bat');
+    const installDir = 'C:\\Program Files (x86)\\The Parcoil Network\\Sparkle';
+    const debloatBatPath = path.join(installDir, 'debloat.bat');
     const debloatBatUrl = 'https://raw.githubusercontent.com/Parcoil/files/main/debloat.bat';
-    
+
+    createDirectoryIfNotExists(installDir);
+
     downloadNewerFile(debloatBatUrl, debloatBatPath, () => {
       runBatFile(debloatBatPath);
     });
   });
 }
+
 ipcMain.on('get-ram-usage', (event) => {
   const totalMemory = os.totalmem();
   const freeMemory = os.freemem();
@@ -109,16 +122,6 @@ function formatBytes(bytes) {
   if (bytes === 0) return '0 Byte';
   const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10);
   return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
-}
-
-function downloadFile(url, filePath, callback) {
-  const file = fs.createWriteStream(filePath);
-  https.get(url, function (response) {
-    response.pipe(file);
-    file.on('finish', function () {
-      file.close(callback);
-    });
-  });
 }
 
 function runBatFile(filePath) {

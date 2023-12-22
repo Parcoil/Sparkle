@@ -11,7 +11,7 @@
 </head>
 <body>
   <nav class="nav-buttons" style="-webkit-app-region: drag">
-    <p id="title">✨ Sparkle v1.0.0</p>
+    <p id="title">✨ Sparkle {Version}</p>
     <div class="nav-buttons">
       <button id="minimize"><i class="fa-light fa-window-minimize"></i></button>
       <button id="maximize"><i class="fa-light fa-square"></i></button>
@@ -19,7 +19,11 @@
     </div>
   </nav>
   <div class="container">
-    <h1 class="text-center mt-5">Welcome To Sparkle ✨</h1>
+    <h1 class="text-center mt-5">
+      <span class="white-text">Welcome To Sparkle </span>
+      <span class="yellow-text">✨</span>
+    </h1>
+  
     <h6 class="text-center">Windows Optimizer</h6>
     <div class="buttons text-center mt-4">
       <button type="button" class="btn btn-primary mx-2" id="runClean">Cleaner</button>
@@ -37,6 +41,33 @@
     <p class="mt-5" style="color:#4c4c4c">&copy; 2023 Parcoil Network </p>
   </div>
   <script src="script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="modal" id="runningScriptModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Running <span id="scriptName"></span> script</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Additional information or loader can be added here -->
+          Please wait while the <span id="scriptType"></span> script is running...
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
 <style>
@@ -150,4 +181,77 @@ body {
 .btn-primary:hover {
   opacity: 0.8;
 }
+</style>
+<script>
+  // Fetching the version from package.json using Electron's built-in 'fs' module
+  const fs = require('fs');
+  const path = require('path');
+
+  // Get the path to package.json
+  const packagePath = path.join(__dirname, 'package.json');
+
+  // Read the package.json file
+  fs.readFile(packagePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    // Parse the JSON content to retrieve version
+    const packageData = JSON.parse(data);
+    const version = packageData.version;
+
+    // Set the version in the HTML element
+    const titleElement = document.getElementById('title');
+    titleElement.textContent = `✨ Sparkle v${version}`;
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  // Event listener for the Clean and Debloat buttons
+  document.getElementById('runClean').addEventListener('click', () => {
+    runScript('Clean');
+  });
+
+  document.getElementById('runDebloat').addEventListener('click', () => {
+    runScript('Debloat');
+  });
+
+  // Function to run the script and show modal
+  function runScript(scriptType) {
+    const modal = new bootstrap.Modal(document.getElementById('runningScriptModal'), {
+      keyboard: false
+    });
+
+    document.getElementById('runningScriptText').textContent = `Running ${scriptType} script`;
+    modal.show();
+
+    // Simulate script execution (replace this with your actual script execution logic)
+    setTimeout(() => {
+      modal.hide();
+      // Replace with your logic to run the bat file or perform other actions
+    }, 3000); // Simulated execution time: 3 seconds (3000ms)
+  }
+});
+</script>
+<style>
+    .yellow-text {
+      color: yellow; /* Set emoji color */
+      font-size: 1.5em; /* Adjust emoji size */
+      animation: glow 5s ease-in-out infinite;
+    }
+
+    /* Glowing effect animation for the emoji */
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 1px yellow, 0 0 2px yellow;
+      }
+      50% {
+        text-shadow: 0 0 2px yellow, 0 0 3px yellow;
+      }
+      100% {
+        text-shadow: 0 0 3px yellow, 0 0 4px yellow;
+      }
+    }
 </style>
