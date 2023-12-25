@@ -135,6 +135,8 @@ setInterval(runBatttray, 300000);
   });
 }
 
+
+
 ipcMain.on('get-ram-usage', (event) => {
   const totalMemory = os.totalmem();
   const freeMemory = os.freemem();
@@ -178,7 +180,7 @@ app.on('ready', () => {
   createWindow();
 
   // Tray icon setup
-  tray = new Tray('assets/icon.ico'); // Replace with your icon path
+  const tray = new Tray(path.join(__dirname, 'icon.ico'));; // Replace with your icon path
   const contextMenu = Menu.buildFromTemplate([
     { label: 'Open', click:  () => { win.show(); } },
     { label: 'Quit', click:  () => { 

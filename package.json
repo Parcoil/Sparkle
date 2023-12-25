@@ -25,7 +25,8 @@
       "output": "build"
     },
     "win": {
-      "requestedExecutionLevel": "requireAdministrator"
+      "requestedExecutionLevel": "requireAdministrator",
+      "startupShortcut": "AutoStart"
     },
     "files": [
       "assets/**/*",
