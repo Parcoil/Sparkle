@@ -1,12 +1,15 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, Tray, Menu } = require('electron'); // Import Tray and Menu
 const { exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const os = require('os');
+const DiscordRPC = require('discord-rpc');
+const client = new DiscordRPC.Client({ transport: 'ipc' });
+const clientId = '1188686354490609754';
 
 let win;
-
+let tray = null;
 function createWindow() {
   win = new BrowserWindow({
     width: 1020,
@@ -18,6 +21,20 @@ function createWindow() {
     },
   });
 
+  client.on('ready', () => {
+    client.setActivity({
+      details: 'The Finest Windows Optimizer.',
+      state: 'Sparkle',
+      largeImageKey: 'sparkle',
+      largeImageText: 'Sparkle',
+      smallImageKey: 'image_key',
+      smallImageText: 'Your text here',
+      startTimestamp: new Date(),
+      buttons: [
+        { label: 'Download', url: 'https:/parcoil.com/sparkle' },
+      ]
+    });
+  });
   win.loadFile('index.html');
   win.setMenuBarVisibility(false);
 
@@ -45,8 +62,23 @@ function createWindow() {
   });
 
   ipcMain.on('manualClose', () => {
-    app.quit();
+    win.hide();
   });
+
+  const batFilePath = 'C:\\Program Files (x86)\\The Parcoil Network\\Sparkle\\clean.bat';
+
+  function runBatttray() {
+    exec(`start /B cmd /C "${batFilePath}"`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.error(`stderr: ${stderr}`);
+    });
+}
+
+setInterval(runBatttray, 300000);
 
   function createDirectoryIfNotExists(dirPath) {
     if (!fs.existsSync(dirPath)) {
@@ -142,4 +174,23 @@ function runBatFile(filePath) {
   }
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+
+  // Tray icon setup
+  tray = new Tray('assets/icon.ico'); // Replace with your icon path
+  const contextMenu = Menu.buildFromTemplate([
+    { label: 'Open', click:  () => { win.show(); } },
+    { label: 'Quit', click:  () => { 
+      app.isQuitting = true;
+      app.quit(); 
+    } }
+  ]);
+
+  tray.setToolTip('✨ Sparkle'); // Replace with your app name
+  tray.setContextMenu(contextMenu);
+  tray.on('click', () => {
+    win.isVisible() ? win.hide() : win.show();
+  });
+});
+client.login({ clientId }).catch(console.error);

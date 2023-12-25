@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title id="navtitle"> Sparkle {Version}</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -204,6 +204,8 @@ body {
     // Set the version in the HTML element
     const titleElement = document.getElementById('title');
     titleElement.textContent = `✨ Sparkle v${version}`;
+    const navtitleElement = document.getElementById('navtitle');
+    navtitleElement.textContent = `✨ Sparkle v${version}`;
   });
 </script>
 
