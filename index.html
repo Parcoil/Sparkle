@@ -8,7 +8,16 @@
   <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  
+  <style>
+    /* Center align the content vertically and horizontally */
+    .center-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+  </style>
 </head>
 <body>
   <nav class="nav-buttons" style="-webkit-app-region: drag">
@@ -19,46 +28,29 @@
       <button id="close"><i class="fa-light fa-xmark"></i></button>
     </div>
   </nav>
-  <div class="container">
-    <h1 class="text-center mt-5">
-      <span class="white-text">Welcome To Sparkle </span>
-      <span class="yellow-text">✨</span>
-    </h1>
-  
-    <h6 class="text-center">Windows Optimizer</h6>
-    <div class="buttons text-center mt-4">
-      <button type="button" class="btn btn-primary mx-2" data-toggle="tooltip" title="Hooray!" id="runClean">Cleaner</button>
-      <button type="button" class="btn btn-primary mx-2" id="runDebloat">Debloat</button>
-      
-      <div id="ramUsage" class="mt-4">
-        <h4 class="text-center mb-3">Ram Usage</h4>
-        <div class="progress">
-          <div id="progressBar" class="progress-bar bg-success progress-bar-striped active" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-          
+  <div class="center-content">
+    <div class="text-center mt-5">
+      <h1>
+        <span class="white-text">Welcome To Sparkle </span>
+        <span class="yellow-text">✨</span>
+      </h1>
+      <h6 class="text-center">Windows Optimizer</h6>
+      <div class="buttons text-center mt-4">
+        <button type="button" class="btn btn-primary mx-2" id="runClean">Cleaner</button>
+        <button type="button" class="btn btn-primary mx-2" id="runDebloat">Debloat</button>
+        <div id="ramUsage" class="mt-4">
+          <h4 class="text-center mb-3">Ram Usage</h4>
+          <div class="progress">
+            <div id="progressBar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <p class="mt-2">Total RAM: <span id="totalRam"></span></p>
+          <p>Free RAM: <span id="freeRam"></span></p>
+          <p>Used RAM: <span id="usedRam"></span></p>
         </div>
-        <p class="mt-2">Total RAM: <span id="totalRam"></span></p>
-        <p>Free RAM: <span id="freeRam"></span></p>
-        <p>Used RAM: <span id="usedRam"></span></p>
       </div>
-    </div>
-    <p class="mt-5" style="color:#4c4c4c">&copy; 2023 Parcoil Network </p>
+      <p class="mt-5" style="color:#4c4c4c">&copy; 2023 Parcoil Network </p>
   </div>
   <script src="script.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-  </div>
 </body>
 </html>
 <style>

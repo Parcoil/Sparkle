@@ -1,7 +1,7 @@
 {
   "name": "sparkle",
   "main": "main.js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "The Parcoil network",
   "scripts": {
     "start": "electron .",
