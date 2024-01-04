@@ -7,8 +7,16 @@ const os = require('os');
 const DiscordRPC = require('discord-rpc');
 const client = new DiscordRPC.Client({ transport: 'ipc' });
 const clientId = '1188686354490609754';
+const { app, autoUpdater, dialog } = require('electron');
 let win;
 let tray = null;
+
+autoUpdater.setFeedURL({
+  provider: 'github',
+  repo: 'sparkle',
+  owner: 'parcoil',
+  token: 'your-github-access-token', // if needed for private repo
+});
 
 // Function to update Discord RPC presence
 function updateDiscordRPC(ramUsage) {
