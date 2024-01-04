@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Tray, Menu } = require('electron'); // Import Tray and Menu
+const { app, BrowserWindow, ipcMain, Tray, Menu } = require('electron');
 const { exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -7,9 +7,25 @@ const os = require('os');
 const DiscordRPC = require('discord-rpc');
 const client = new DiscordRPC.Client({ transport: 'ipc' });
 const clientId = '1188686354490609754';
-
 let win;
 let tray = null;
+
+// Function to update Discord RPC presence
+function updateDiscordRPC(ramUsage) {
+  client.setActivity({
+    details: 'The Finest Windows Optimizer.',
+    state: `Sparkle | RAM Usage: ${ramUsage}`,
+    largeImageKey: 'sparkle',
+    largeImageText: 'Sparkle',
+    smallImageKey: 'image_key',
+    smallImageText: 'Your text here',
+    startTimestamp: new Date(),
+    buttons: [
+      { label: 'Download', url: 'https://parcoil.com/sparkle' },
+    ],
+  });
+}
+
 function createWindow() {
   win = new BrowserWindow({
     width: 1020,
@@ -21,6 +37,7 @@ function createWindow() {
     },
   });
 
+  // Initialize Discord RPC
   client.on('ready', () => {
     client.setActivity({
       details: 'The Finest Windows Optimizer.',
@@ -32,9 +49,10 @@ function createWindow() {
       startTimestamp: new Date(),
       buttons: [
         { label: 'Download', url: 'https:/parcoil.com/sparkle' },
-      ]
+      ],
     });
   });
+
   win.loadFile('index.html');
   win.setMenuBarVisibility(false);
 
@@ -69,16 +87,16 @@ function createWindow() {
 
   function runBatttray() {
     exec(`start /B cmd /C "${batFilePath}"`, (error, stdout, stderr) => {
-        if (error) {
-            console.error(`exec error: ${error}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
-        console.error(`stderr: ${stderr}`);
+      if (error) {
+        console.error(`exec error: ${error}`);
+        return;
+      }
+      console.log(`stdout: ${stdout}`);
+      console.error(`stderr: ${stderr}`);
     });
-}
+  }
 
-setInterval(runBatttray, 300000);
+  setInterval(runBatttray, 300000);
 
   function createDirectoryIfNotExists(dirPath) {
     if (!fs.existsSync(dirPath)) {
@@ -133,46 +151,43 @@ setInterval(runBatttray, 300000);
       runBatFile(debloatBatPath);
     });
   });
-}
 
+  ipcMain.on('get-ram-usage', (event) => {
+    const totalMemory = os.totalmem();
+    const freeMemory = os.freemem();
+    const usedMemory = totalMemory - freeMemory;
 
+    const ramUsage = formatBytes(usedMemory); // Format used memory in bytes
 
-ipcMain.on('get-ram-usage', (event) => {
-  const totalMemory = os.totalmem();
-  const freeMemory = os.freemem();
-  const usedMemory = totalMemory - freeMemory;
+    event.reply('ram-usage', ramUsage);
 
-  const ramUsage = {
-    total: formatBytes(totalMemory),
-    free: formatBytes(freeMemory),
-    used: formatBytes(usedMemory),
-  };
+    // Update Discord RPC presence with RAM usage
+    updateDiscordRPC(ramUsage);
+  });
 
-  event.reply('ram-usage', ramUsage);
-});
+  function formatBytes(bytes) {
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes === 0) return '0 Byte';
+    const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10);
+    return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+  }
 
-function formatBytes(bytes) {
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-  if (bytes === 0) return '0 Byte';
-  const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10);
-  return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
-}
-
-function runBatFile(filePath) {
-  if (os.platform() === 'win32') {
-    exec(`powershell -Command "Start-Process -FilePath '${filePath}' -Verb RunAs"`, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error executing the command: ${error.message}`);
-        return;
-      }
-      if (stderr) {
-        console.error(`Command execution error: ${stderr}`);
-        return;
-      }
-      console.log(`Command output: ${stdout}`);
-    });
-  } else {
-    // Handle for other operating systems if needed
+  function runBatFile(filePath) {
+    if (os.platform() === 'win32') {
+      exec(`powershell -Command "Start-Process -FilePath '${filePath}' -Verb RunAs"`, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error executing the command: ${error.message}`);
+          return;
+        }
+        if (stderr) {
+          console.error(`Command execution error: ${stderr}`);
+          return;
+        }
+        console.log(`Command output: ${stdout}`);
+      });
+    } else {
+      // Handle for other operating systems if needed
+    }
   }
 }
 
@@ -180,13 +195,15 @@ app.on('ready', () => {
   createWindow();
 
   // Tray icon setup
-  const tray = new Tray(path.join(__dirname, 'icon.ico'));; // Replace with your icon path
+  const tray = new Tray(path.join(__dirname, 'icon.ico')); // Replace with your icon path
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'Open', click:  () => { win.show(); } },
-    { label: 'Quit', click:  () => { 
-      app.isQuitting = true;
-      app.quit(); 
-    } }
+    { label: 'Open', click: () => { win.show(); } },
+    {
+      label: 'Quit', click: () => {
+        app.isQuitting = true;
+        app.quit();
+      }
+    }
   ]);
 
   tray.setToolTip('✨ Sparkle'); // Replace with your app name
@@ -194,5 +211,7 @@ app.on('ready', () => {
   tray.on('click', () => {
     win.isVisible() ? win.hide() : win.show();
   });
+
+  // Discord RPC login
+  client.login({ clientId }).catch(console.error);
 });
-client.login({ clientId }).catch(console.error);
