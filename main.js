@@ -9,8 +9,9 @@ const client = new DiscordRPC.Client({ transport: "ipc" });
 const clientId = "1188686354490609754";
 const { autoUpdater } = require("electron-updater");
 
-autoUpdater.autoDownload = false;
+autoUpdater.autoDownload = true;
 autoUpdater.autoInstallOnAppQuit = true;
+
 let win;
 let tray = null;
 function createWindow() {
@@ -204,7 +205,7 @@ function runBatFile(filePath) {
           return;
         }
         console.log(`Command output: ${stdout}`);
-      },
+      }
     );
   } else {
     // Handle for other operating systems if needed

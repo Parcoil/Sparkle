@@ -1,7 +1,7 @@
 {
   "name": "sparkle",
   "main": "main.js",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "The Parcoil network",
   "scripts": {
     "start": "electron .",
@@ -22,6 +22,14 @@
     "start": "^5.1.0"
   },
   "build": {
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Parcoil",
+        "repo": "Sparkle",
+        "releaseType": "release"
+      }
+    ],
     "appId": "com.parcoil.sparkle",
     "productName": "Sparkle",
     "target": "NSIS",
@@ -34,12 +42,6 @@
     "files": [
       "assets/**/*",
       "**/*"
-    ],
-    "publish": {
-      "provider": "github",
-      "owner": "Parcoil",
-      "repo": "Sparkle",
-      "releaseType": "release"
-    }
+    ]
   }
 }
