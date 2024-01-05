@@ -2,7 +2,7 @@
 setlocal
 
 set ZIP_URL=https://github.com/Parcoil/Sparkle/releases/latest/download/win-unpacked.zip
-set ZIP_FILE=%TEMP%\win-unpacked.zip
+set ZIP_FILE=C:\Users\%USERNAME%\AppData\Local\Programs\sparkle\win-unpacked.zip
 set EXTRACT_DIR=C:\Users\%USERNAME%\AppData\Local\Programs\sparkle
 
 rem Download the latest ZIP file
