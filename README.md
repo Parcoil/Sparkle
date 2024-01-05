@@ -7,7 +7,6 @@
  <img src="icon.ico" alt="Sparkle Logo" width="100">
   </div>
 
-
 <h1 align="center">Sparkle - ✨ The Finest Windows Optimizer ✨</h1>
 
 <p align="center"><strong>Sparkle</strong> is a powerful and user-friendly Windows optimizer designed to enhance your computer's performance and keep it running smoothly. Say goodbye to sluggishness and hello to a faster, more efficient Windows experience!</p>

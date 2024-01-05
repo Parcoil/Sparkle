@@ -36,66 +36,17 @@
     <a><button class="nostyle" id="internet">Wifi Booster</button></a>
     <a href="settings.html"><button class="nostyle">Settings</button></a>
   </div>
+  
   <div class="center-content">
-    <div class="text-center mt-5">
-      <h1>✨</h1>
-      <h1>
-        
-        <span class="white-text">Sparkle</span>
-      
-      </h1>
-      <h6 class="text-center">Windows Optimizer</h6>
-      <div class="buttons text-center mt-4">
-        <button type="button" class="gone" id="runClean">Cleaner</button>
-        <button type="button" class="gone" id="runDebloat">Debloat</button>
-        <div id="ramUsage" class="mt-4">
-          <h4 class="text-center mb-3">Ram Usage</h4>
-          <div class="progress">
-            <div id="progressBar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <p class="mt-2">Total RAM: <span id="totalRam"></span></p>
-          <p>Free RAM: <span id="freeRam"></span></p>
-          <p>Used RAM: <span id="usedRam"></span></p>
-        </div>
+    <h1><span class="white-text">Settings</span></h1>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+        <label class="form-check-label" for="flexSwitchCheckDefault">Discord RPC </label>
       </div>
-      <p class="mt-5" style="color:#4c4c4c">&copy; 2024 Parcoil Network </p>
+    <div class="text-center mt-5">
+<p class="mt-5" style="color:#4c4c4c">&copy; 2024 Parcoil Network </p>
   </div>
   <script src="script.js"></script>
-  <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast" class="toast bg-dark text-white" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <strong class="me-auto">✨ Sparkle</strong>
-        
-        <button type="button" class="btn-close text-white" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        Hello, world! This is a toast message.
-      </div>
-    </div>
-  </div>
-
-<script>
-  const toastLiveExample = document.getElementById('liveToast')
-  const toastBootstrap = new bootstrap.Toast(toastLiveExample)
-
-  document.getElementById('runDebloat').addEventListener('click', () => {
-    showToast('Debloating...')
-  })
-
-  document.getElementById('runClean').addEventListener('click', () => {
-    showToast('Cleaning...')
-  })
-
-  document.getElementById('internet').addEventListener('click', () => {
-    showToast('Boosting Wifi...')
-  })
-
-  function showToast(message) {
-    const toastBody = toastLiveExample.querySelector('.toast-body')
-    toastBody.textContent = message
-    toastBootstrap.show()
-  }
-</script>
 </body>
 </html>
 <style>

@@ -1,21 +1,25 @@
 {
   "name": "sparkle",
   "main": "main.js",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "author": "The Parcoil network",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder"
   },
-  "repository": "https://github.com/parcoil/sparkle",
+  "repository": "https://github.com/Parcoil/Sparkle",
   "devDependencies": {
     "discord-rpc": "^4.0.1",
     "electron": "^27.0.0",
-    "electron-builder": "^22.14.13"
+    "electron-builder": "^22.14.13",
+    "electron-updater": "^6.1.7",
+    "prettier": "3.1.1"
   },
   "dependencies": {
     "discord-rpc": "^4.0.1",
-    "electron-updater": "^6.1.7"
+    "electron-updater": "^6.1.7",
+    "npm": "^10.2.5",
+    "start": "^5.1.0"
   },
   "build": {
     "appId": "com.parcoil.sparkle",
@@ -25,12 +29,17 @@
       "output": "build"
     },
     "win": {
-      "requestedExecutionLevel": "requireAdministrator",
-      "startupShortcut": "AutoStart"
+      "requestedExecutionLevel": "requireAdministrator"
     },
     "files": [
       "assets/**/*",
       "**/*"
-    ]
+    ],
+    "publish": {
+      "provider": "github",
+      "owner": "Parcoil",
+      "repo": "Sparkle",
+      "releaseType": "release"
+    }
   }
 }

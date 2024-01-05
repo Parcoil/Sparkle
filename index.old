@@ -30,24 +30,22 @@
     </div>
   </div>
   <div class="navitems">
-    <a href="index.html"><button class="nostyle">Home</button></a>
-    <a><button class="nostyle" id="runDebloat">Debloat</button></a>
-    <a><button class="nostyle" id="runClean">Cleaner</button></a>
-    <a><button class="nostyle" id="internet">Wifi Booster</button></a>
-    <a href="settings.html"><button class="nostyle">Settings</button></a>
+    <a>Home</a>
+    <a>Debloat</a>
+    <a id="runClean">Cleaner</a>
+    <a>Wifi Booster</a>
+    <a>Settings</a>
   </div>
   <div class="center-content">
     <div class="text-center mt-5">
-      <h1>✨</h1>
       <h1>
-        
-        <span class="white-text">Sparkle</span>
-      
+        <span class="white-text">Welcome To Sparkle </span>
+        <span class="yellow-text">✨</span>
       </h1>
       <h6 class="text-center">Windows Optimizer</h6>
       <div class="buttons text-center mt-4">
-        <button type="button" class="gone" id="runClean">Cleaner</button>
-        <button type="button" class="gone" id="runDebloat">Debloat</button>
+        <button type="button" class="btn btn-primary mx-2" id="runClean">Cleaner</button>
+        <button type="button" class="btn btn-primary mx-2" id="runDebloat">Debloat</button>
         <div id="ramUsage" class="mt-4">
           <h4 class="text-center mb-3">Ram Usage</h4>
           <div class="progress">
@@ -58,44 +56,9 @@
           <p>Used RAM: <span id="usedRam"></span></p>
         </div>
       </div>
-      <p class="mt-5" style="color:#4c4c4c">&copy; 2024 Parcoil Network </p>
+      <p class="mt-5" style="color:#4c4c4c">&copy; 2023 Parcoil Network </p>
   </div>
   <script src="script.js"></script>
-  <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast" class="toast bg-dark text-white" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <strong class="me-auto">✨ Sparkle</strong>
-        
-        <button type="button" class="btn-close text-white" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        Hello, world! This is a toast message.
-      </div>
-    </div>
-  </div>
-
-<script>
-  const toastLiveExample = document.getElementById('liveToast')
-  const toastBootstrap = new bootstrap.Toast(toastLiveExample)
-
-  document.getElementById('runDebloat').addEventListener('click', () => {
-    showToast('Debloating...')
-  })
-
-  document.getElementById('runClean').addEventListener('click', () => {
-    showToast('Cleaning...')
-  })
-
-  document.getElementById('internet').addEventListener('click', () => {
-    showToast('Boosting Wifi...')
-  })
-
-  function showToast(message) {
-    const toastBody = toastLiveExample.querySelector('.toast-body')
-    toastBody.textContent = message
-    toastBootstrap.show()
-  }
-</script>
 </body>
 </html>
 <style>
