@@ -19,7 +19,7 @@
   <li>🚀 <strong>System Speedup</strong>: Boost your PC's speed by optimizing startup programs and system resources.</li>
   <li>🛠️ <strong>Registry Cleanup</strong>: Fix registry errors to improve system stability and performance.</li>
   <li>🌐 <strong>Internet Speed Booster</strong>: Optimize your internet connection for faster browsing and downloads. (Coming Soon!)</li>
-  <li>🔄 <strong>Automatic Updates</strong>: Stay up-to-date with the latest performance improvements and bug fixes. (Coming Soon!)</li>
+  <li>🔄 <strong>Automatic Updates</strong>: Stay up-to-date with the latest performance improvements and bug fixes. </li>
 </ul>
 
 <h2>Installation</h2>
