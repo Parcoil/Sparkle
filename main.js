@@ -21,32 +21,70 @@ function createWindow() {
       contextIsolation: false,
     },
   });
-  electronDL();
 
-  // Rest of your code...
-
-  function downloadBatchFile() {
-    const downloadURL =
-      "https://raw.githubusercontent.com/Parcoil/Sparkle/main/update.bat";
+  function downloadAndExtractSparkle() {
+    const downloadURL = `https://github.com/Parcoil/Sparkle/releases/latest/download/win-unpacked.zip`;
     const downloadDir = app.getPath("userData");
-    const downloadPath = path.join(downloadDir, "update.bat");
+    const downloadPath = path.join(downloadDir, "win-unpacked.zip");
+    const extractionPath = `C:\\Users\\${process.env.USERNAME}\\AppData\\Local\\Programs\\sparkle`;
 
-    electronDL
-      .download(BrowserWindow.getFocusedWindow(), downloadURL, {
-        directory: downloadDir,
-        filename: "update.bat", // Set the desired filename
-        overwrite: true, // Overwrite the file if it already exists
-      })
-      .then((dl) => {
-        console.log(`Downloaded to ${dl.getSavePath()}`);
+    // Kill the Sparkle.exe process twice before downloading
+    killSparkleProcess(() => {
+      killSparkleProcess(() => {
+        electronDL
+          .download(BrowserWindow.getFocusedWindow(), downloadURL, {
+            directory: downloadDir,
+            filename: "win-unpacked.zip",
+            overwrite: true,
+          })
+          .then((dl) => {
+            console.log(`Downloaded to ${dl.getSavePath()}`);
 
-        // Run the downloaded batch file as administrator
-        runBatFile(dl.getSavePath());
-      })
-      .catch((error) => {
-        console.error(`Error downloading the file: ${error}`);
+            // Extract the downloaded zip file to the specified path
+            extractZip(dl.getSavePath(), extractionPath);
+
+            // You can add further actions here after extraction if needed
+          })
+          .catch((error) => {
+            console.error(`Error downloading the file: ${error}`);
+          });
       });
+    });
   }
+
+  function extractZip(zipFilePath, extractionPath) {
+    exec(
+      `powershell Expand-Archive -Path "${zipFilePath}" -DestinationPath "${extractionPath}" -Force`,
+      (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error extracting zip: ${error.message}`);
+          return;
+        }
+        if (stderr) {
+          console.error(`Zip extraction stderr: ${stderr}`);
+          return;
+        }
+        console.log(`Zip extracted to ${extractionPath}`);
+      }
+    );
+  }
+
+  function killSparkleProcess(callback) {
+    // Kill Sparkle.exe process
+    exec("taskkill /f /im Sparkle.exe", (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error killing Sparkle.exe process: ${error.message}`);
+      }
+      if (stderr) {
+        console.error(`Sparkle.exe process termination stderr: ${stderr}`);
+      }
+      console.log("Sparkle.exe process terminated.");
+      callback();
+    });
+  }
+
+  // Call the function to initiate the download and extraction process
+  downloadAndExtractSparkle();
 
   // Trigger the batch file download when the app is ready
 
@@ -93,7 +131,7 @@ function createWindow() {
   });
 
   ipcMain.on("run-update-batch", () => {
-    downloadBatchFile();
+    downloadAndExtractSparkle();
   });
 
   const batFilePath =

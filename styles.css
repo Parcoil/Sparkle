@@ -117,3 +117,7 @@ body::-webkit-scrollbar {
 .gone {
   display: none;
 }
+
+#updateProgress {
+  display: none;
+}
