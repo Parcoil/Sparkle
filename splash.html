@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Your App Splash</title>
+    <link rel="stylesheet" href="splash.css" />
+  </head>
+  <body>
+    <div class="splash-container">
+      <img src="loading.gif" alt="Your Logo" />
+      <p>Loading...</p>
+    </div>
+    <script src="splash.js"></script>
+  </body>
+</html>
+<style>
+  * {
+    user-select: none;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+  }
+
+  .splash-container {
+    text-align: center;
+    color: #ffffff;
+  }
+
+  img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  p {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+</style>

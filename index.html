@@ -24,9 +24,9 @@
     <p id="title">✨ Sparkle {Version}</p>
 
     <div class="nav-buttons">
-      <button id="minimize"><i class="fa-light fa-window-minimize"></i></button>
-      <button id="maximize"><i class="fa-light fa-square"></i></button>
-      <button id="close"><i class="fa-light fa-xmark"></i></button>
+      <button id="minimize"><i class="fa-regular fa-window-minimize"></i></button>
+      <button id="maximize"><i class="fa-regular fa-square"></i></button>
+      <button id="close"><i class="fa-regular fa-xmark"></i></button>
     </div>
   </div>
   <div class="navitems">
@@ -51,7 +51,7 @@
         <div id="ramUsage" class="mt-4">
           <h4 class="text-center mb-3">Ram Usage</h4>
           <div class="progress">
-            <div id="progressBar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
           <p class="mt-2">Total RAM: <span id="totalRam"></span></p>
           <p>Free RAM: <span id="freeRam"></span></p>
@@ -208,6 +208,12 @@ body {
 }
 .btn-primary:hover {
   opacity: 0.8;
+}
+.progress {
+  width: 200px;
+}
+span{
+transition: all 0.3s ease;
 }
 </style>
 <script>

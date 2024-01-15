@@ -11,11 +11,26 @@ const clientId = "1188686354490609754";
 
 let win;
 let tray = null;
+function loading() {
+  splashWindow = new BrowserWindow({
+    width: 400,
+    height: 300,
+    frame: false, // Hide window frame
+    alwaysOnTop: true, // Keep it on top
+  });
+  splashWindow.loadFile("splash.html");
+  timeout = setTimeout(() => {
+    splashWindow.close();
+    win.show();
+  }, 3000);
+}
 function createWindow() {
   win = new BrowserWindow({
     width: 1020,
     height: 600,
     frame: false,
+    cache: true,
+    show: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -23,33 +38,29 @@ function createWindow() {
   });
 
   function downloadAndExtractSparkle() {
-    const downloadURL = `https://github.com/Parcoil/Sparkle/releases/latest/download/win-unpacked.zip`;
+    const githubRepo = "Parcoil/Sparkle"; // GitHub repository name
+    const downloadURL = `https://github.com/${githubRepo}/releases/latest/download/win-unpacked.zip`;
     const downloadDir = app.getPath("userData");
     const downloadPath = path.join(downloadDir, "win-unpacked.zip");
     const extractionPath = `C:\\Users\\${process.env.USERNAME}\\AppData\\Local\\Programs\\sparkle`;
 
-    // Kill the Sparkle.exe process twice before downloading
-    killSparkleProcess(() => {
-      killSparkleProcess(() => {
-        electronDL
-          .download(BrowserWindow.getFocusedWindow(), downloadURL, {
-            directory: downloadDir,
-            filename: "win-unpacked.zip",
-            overwrite: true,
-          })
-          .then((dl) => {
-            console.log(`Downloaded to ${dl.getSavePath()}`);
+    electronDL
+      .download(BrowserWindow.getFocusedWindow(), downloadURL, {
+        directory: downloadDir,
+        filename: "win-unpacked.zip", // Set the desired filename
+        overwrite: true, // Overwrite the file if it already exists
+      })
+      .then((dl) => {
+        console.log(`Downloaded to ${dl.getSavePath()}`);
 
-            // Extract the downloaded zip file to the specified path
-            extractZip(dl.getSavePath(), extractionPath);
+        // Extract the downloaded zip file to the specified path
+        extractZip(dl.getSavePath(), extractionPath);
 
-            // You can add further actions here after extraction if needed
-          })
-          .catch((error) => {
-            console.error(`Error downloading the file: ${error}`);
-          });
+        // You can add further actions here after extraction if needed
+      })
+      .catch((error) => {
+        console.error(`Error downloading the file: ${error}`);
       });
-    });
   }
 
   function extractZip(zipFilePath, extractionPath) {
@@ -67,20 +78,6 @@ function createWindow() {
         console.log(`Zip extracted to ${extractionPath}`);
       }
     );
-  }
-
-  function killSparkleProcess(callback) {
-    // Kill Sparkle.exe process
-    exec("taskkill /f /im Sparkle.exe", (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error killing Sparkle.exe process: ${error.message}`);
-      }
-      if (stderr) {
-        console.error(`Sparkle.exe process termination stderr: ${stderr}`);
-      }
-      console.log("Sparkle.exe process terminated.");
-      callback();
-    });
   }
 
   // Call the function to initiate the download and extraction process
@@ -190,6 +187,14 @@ function createWindow() {
 
     downloadNewerFile(cleanBatUrl, cleanBatPath, () => {
       runBatFile(cleanBatPath);
+
+      // After running the batch file, run cleanmgr with /sagerun:1
+      const { spawn } = require("child_process");
+      const cleanmgrProcess = spawn("cleanmgr", ["/sagerun:1"]);
+
+      cleanmgrProcess.on("close", (code) => {
+        console.log(`cleanmgr exited with code ${code}`);
+      });
     });
   });
 
@@ -280,6 +285,7 @@ function runBatFile(filePath) {
 }
 
 app.on("ready", () => {
+  loading();
   createWindow();
 
   // Tray icon setup
