@@ -1,16 +1,13 @@
-const { app, BrowserWindow, ipcMain, Tray, Menu } = require("electron"); // Import Tray and Menu
+const { app, BrowserWindow, ipcMain, Tray, Menu, shell } = require("electron"); // Import Tray and Menu
 const { exec } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 const https = require("https");
 const os = require("os");
 const DiscordRPC = require("discord-rpc");
+const electronDL = require("electron-dl");
 const client = new DiscordRPC.Client({ transport: "ipc" });
 const clientId = "1188686354490609754";
-const { autoUpdater } = require("electron-updater");
-
-autoUpdater.autoDownload = true;
-autoUpdater.autoInstallOnAppQuit = true;
 
 let win;
 let tray = null;
@@ -24,6 +21,34 @@ function createWindow() {
       contextIsolation: false,
     },
   });
+  electronDL();
+
+  // Rest of your code...
+
+  function downloadBatchFile() {
+    const downloadURL =
+      "https://raw.githubusercontent.com/Parcoil/Sparkle/main/update.bat";
+    const downloadDir = app.getPath("userData");
+    const downloadPath = path.join(downloadDir, "update.bat");
+
+    electronDL
+      .download(BrowserWindow.getFocusedWindow(), downloadURL, {
+        directory: downloadDir,
+        filename: "update.bat", // Set the desired filename
+        overwrite: true, // Overwrite the file if it already exists
+      })
+      .then((dl) => {
+        console.log(`Downloaded to ${dl.getSavePath()}`);
+
+        // Run the downloaded batch file as administrator
+        runBatFile(dl.getSavePath());
+      })
+      .catch((error) => {
+        console.error(`Error downloading the file: ${error}`);
+      });
+  }
+
+  // Trigger the batch file download when the app is ready
 
   client.on("ready", () => {
     client.setActivity({
@@ -65,6 +90,10 @@ function createWindow() {
 
   ipcMain.on("manualClose", () => {
     win.hide();
+  });
+
+  ipcMain.on("run-update-batch", () => {
+    downloadBatchFile();
   });
 
   const batFilePath =
@@ -213,7 +242,6 @@ function runBatFile(filePath) {
 }
 
 app.on("ready", () => {
-  autoUpdater.checkForUpdates();
   createWindow();
 
   // Tray icon setup
@@ -241,16 +269,3 @@ app.on("ready", () => {
   });
 });
 client.login({ clientId }).catch(console.error);
-autoUpdater.on("update-available", () => {
-  // Download updates in the background
-  autoUpdater.downloadUpdate();
-});
-
-autoUpdater.on("update-downloaded", () => {
-  // Notify the user that the update is ready to be installed
-  autoUpdater.quitAndInstall();
-});
-
-autoUpdater.on("update-not-available", (info) => {
-  console.log("No updates available");
-});

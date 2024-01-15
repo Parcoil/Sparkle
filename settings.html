@@ -33,8 +33,9 @@
     <a href="index.html"><button class="nostyle">Home</button></a>
     <a><button class="nostyle" id="runDebloat">Debloat</button></a>
     <a><button class="nostyle" id="runClean">Cleaner</button></a>
-    <a><button class="nostyle" id="internet">Wifi Booster</button></a>
-    <a href="settings.html"><button class="nostyle">Settings</button></a>
+
+     <a><button class="nostyle" id="internet">Drivers</button></a>
+  <a><button class="nostyle" id="internet">Wifi Booster</button></a>
   </div>
   
   <div class="center-content">
@@ -43,11 +44,23 @@
         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
         <label class="form-check-label" for="flexSwitchCheckDefault">Discord RPC </label>
       </div>
+        <button class="btn btn-primary mt-4" id="checkUpdatesBtn">Check for updates</button>
+
     <div class="text-center mt-5">
 <p class="mt-5" style="color:#4c4c4c">&copy; 2024 Parcoil Network </p>
   </div>
   <script src="script.js"></script>
 </body>
+  <script>
+  
+
+    // Listen for the button click event
+    const checkUpdatesBtn = document.getElementById("checkUpdatesBtn");
+    checkUpdatesBtn.addEventListener("click", () => {
+      // Send an IPC message to trigger the batch script execution
+      ipcRenderer.send("run-update-batch");
+    });
+  </script>
 </html>
 <style>
 /* Your existing CSS */

@@ -1,7 +1,7 @@
 {
   "name": "sparkle",
   "main": "main.js",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "author": "The Parcoil network",
   "scripts": {
     "start": "electron .",
@@ -13,11 +13,14 @@
     "electron": "^27.0.0",
     "electron-builder": "^22.14.13",
     "electron-updater": "^6.1.7",
+    "extract-zip": "^2.0.1",
     "prettier": "3.1.1"
   },
   "dependencies": {
     "discord-rpc": "^4.0.1",
+    "electron-dl": "^3.5.1",
     "electron-updater": "^6.1.7",
+    "extract-zip": "^2.0.1",
     "npm": "^10.2.5",
     "start": "^5.1.0"
   },
