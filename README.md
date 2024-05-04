@@ -3,7 +3,7 @@
 
 <body>
 <div align="center">
-
+<h1 style="color: red;">SPARKLE IS BEING REMADE </h1>
  <img src="icon.ico" alt="Sparkle Logo" width="100">
   </div>
 
