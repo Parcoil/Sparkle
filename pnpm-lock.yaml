@@ -12,8 +12,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2(electron@43.1.1)
       discord-rpc-new:
-        specifier: workspace:*
-        version: link:packages/discord-rpc-new
+        specifier: ^1.4.2
+        version: 1.4.3(typescript@5.9.3)
       electron-log:
         specifier: ^5.4.4
         version: 5.4.4
@@ -131,9 +131,7 @@ importers:
         version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@25.9.5)(vite@7.3.6(@types/node@25.9.5)(jiti@2.7.0)(lightningcss@1.32.0))
       zustand:
         specifier: ^5.0.14
-        version: 5.0.14(@types/react@19.2.17)(react@19.2.7)
-
-  packages/discord-rpc-new: {}
+        version: 5.0.14(@types/react@19.2.17)(react@19.2.7)(use-sync-external-store@1.6.0(react@19.2.7))
 
 packages:
 
@@ -1507,6 +1505,12 @@ packages:
 
   dir-compare@4.2.0:
     resolution: {integrity: sha512-2xMCmOoMrdQIPHdsTawECdNPwlVFB9zGcz3kuhmBO6U3oU+UQjsue0i8ayLKpgBcm+hcXPMVSGUN9d+pvJ6+VQ==}
+
+  discord-rpc-new@1.4.3:
+    resolution: {integrity: sha512-CIBOH90BpvQdVca3DgfKim8RFo2x3su2tUHIsukSHR2NJ75RI2KHkrwaxEH4EYdKqBfdlj3kPBKcuRYWw4XF0w==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      typescript: ^5.9.3
 
   dmg-builder@26.15.3:
     resolution: {integrity: sha512-O3zJUFUYHJKgzPqioHxfxzBzlSC1eXCSr79gMSBKBP5AgjjpmrydMsMLotEg9fAJF36vdUncb+4ndRNxoPdlSQ==}
@@ -3297,6 +3301,11 @@ packages:
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
+  use-sync-external-store@1.6.0:
+    resolution: {integrity: sha512-Pp6GSwGP/NrPIrxVFAIkOQeyw8lFenOHijQWkUTrDvrF4ALqylP2C/KCkeS9dpUM3KvYRQhna5vt7IL95+ZQ9w==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   utf8-byte-length@1.0.5:
     resolution: {integrity: sha512-Xn0w3MtiQ6zoz2vFyUVruaCL53O/DwUvkEeOvj+uulMm0BkUGYWmBYVyElqZaSLhY6ZD0ulfU3aBra2aVT4xfA==}
 
@@ -4861,6 +4870,10 @@ snapshots:
     dependencies:
       minimatch: 3.1.5
       p-limit: 3.1.0
+
+  discord-rpc-new@1.4.3(typescript@5.9.3):
+    dependencies:
+      typescript: 5.9.3
 
   dmg-builder@26.15.3(electron-builder-squirrel-windows@26.8.1):
     dependencies:
@@ -7243,6 +7256,11 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
+  use-sync-external-store@1.6.0(react@19.2.7):
+    dependencies:
+      react: 19.2.7
+    optional: true
+
   utf8-byte-length@1.0.5: {}
 
   util-deprecate@1.0.2: {}
@@ -7414,9 +7432,10 @@ snapshots:
 
   zod@4.4.3: {}
 
-  zustand@5.0.14(@types/react@19.2.17)(react@19.2.7):
+  zustand@5.0.14(@types/react@19.2.17)(react@19.2.7)(use-sync-external-store@1.6.0(react@19.2.7)):
     optionalDependencies:
       '@types/react': 19.2.17
       react: 19.2.7
+      use-sync-external-store: 1.6.0(react@19.2.7)
 
   zwitch@2.0.4: {}
