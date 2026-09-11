@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-16T00:18:49.219Z",
+  "version": "2026-09-11T01:08:00.974Z",
   "tweaks": [
     {
       "id": "24-hour-clock",
@@ -86,7 +86,8 @@
       "description": "Removes Microsoft's Copilot feature. (will fail if copilot is not installed)",
       "category": [
         "Performance",
-        "Privacy"
+        "Privacy",
+        "AI"
       ],
       "recommended": true,
       "reversible": true,
@@ -226,7 +227,8 @@
       "title": "Disable Windows Recall",
       "description": "Disables the Windows Recall feature for better privacy.",
       "category": [
-        "Privacy"
+        "Privacy",
+        "AI"
       ],
       "recommended": false,
       "reversible": true,
@@ -403,7 +405,6 @@
       "title": "Remove Microsoft Edge",
       "description": "Removes Microsoft Edge from Windows.",
       "category": [
-        "System",
         "Privacy"
       ],
       "recommended": true,
